@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+    
+    <entry>
+      <title><![CDATA[前端学习step]]></title>
+      <url>http://isteven.site/2021/12/31/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0step/</url>
+      <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">目前主流的语言和思想都是相通的，或者说是相互借鉴学习的，web标准也会汲取里面的精</span><br><span class="line">华作为参考加入到标准中，这里来说一下主流的框架学习步骤: 构建，指令，表单，组</span><br><span class="line">件(通讯，生命周期)，路由，状态管理</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h2><p>一般构建有前端引入和后端构建两种方式，前端引入的方式主流的就是jit（java的方法），提倡的是运行时编译，好处是比较灵活，可以充分历用vm的性能。后端构建就是提前代码在后端编译好，一次构建不需要在每次运行时花费额外的时间。两种方式各有优缺点，所以主流语言都采用两种方式相结合。<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">两种方式的名词了解一下：jit和aot</span><br></pre></td></tr></table></figure></p>
+<h4 id="vue的前端引入"><a href="#vue的前端引入" class="headerlink" title="vue的前端引入"></a>vue的前端引入</h4><p>这种方式其实就是前端jit的方式，目前只有学习的时候用一下，主流方式还是后端构建，主流库cdn推荐：unpkg.com<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;script src=&quot;static/js/vue.global.prod.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="vue-后端构建"><a href="#vue-后端构建" class="headerlink" title="vue 后端构建"></a>vue 后端构建</h4><p>目前vue最新版本是3，所以这里使用vite构建<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># npm 6.x</span><br><span class="line">$ npm init vite@latest &lt;project-name&gt; --template vue</span><br><span class="line"></span><br><span class="line"># npm 7+，需要加上额外的双短横线</span><br><span class="line">$ npm init vite@latest &lt;project-name&gt; -- --template vue</span><br><span class="line"></span><br><span class="line">$ cd &lt;project-name&gt;</span><br><span class="line">$ npm install</span><br><span class="line">$ npm run dev</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>目前前端语言的学习都离不开node，这个是构建的基础，webpack这个也要了解一下，构建的工具都是基于它来实现的，想要优化还是要深入了解一下。</p>
+<h4 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">demo</span><br><span class="line">  | node_modules</span><br><span class="line">  | public</span><br><span class="line">  | src</span><br><span class="line">      | main.js</span><br><span class="line">      | App.vue</span><br><span class="line">  | index.html</span><br><span class="line">  | package.json</span><br><span class="line">  | vite.config.js</span><br></pre></td></tr></table></figure>
+<p>说明：  </p>
+<ol>
+<li>vite.config.js 构建使用的配置文件   </li>
+<li>index.html 首页   </li>
+<li>main.js 入口文件，第三方模块，路由，插件都在这里引入   </li>
+<li>App.vue 具体的模板组件，其他组件参考着写就可以了         </li>
+</ol>
+<h4 id="组件模板"><a href="#组件模板" class="headerlink" title="组件模板"></a>组件模板</h4><p>书写vue模板根据IDE自动生成，跟传统的前端一样：html模板，js脚本，css样式三部分。<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="模板指令"><a href="#模板指令" class="headerlink" title="模板指令"></a>模板指令</h4><p>模板中使用最多的就是各种指令，常用指令集<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">v-text</span><br><span class="line">v-html</span><br><span class="line">v-show</span><br><span class="line">v-if</span><br><span class="line">v-else</span><br><span class="line">v-else-if</span><br><span class="line">v-for</span><br><span class="line">v-on</span><br><span class="line">v-bind</span><br><span class="line">v-model</span><br><span class="line">v-pre</span><br><span class="line">v-cloak</span><br><span class="line">v-once</span><br></pre></td></tr></table></figure></p>
+<h4 id="js脚本"><a href="#js脚本" class="headerlink" title="js脚本"></a>js脚本</h4><p>脚本中有数据和处理方法等，还有生命周期钩子函数<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">    components: &#123; // 使用组件 &#125;,</span><br><span class="line">    data()&#123;</span><br><span class="line">        // 定义数据</span><br><span class="line">        return &#123;</span><br><span class="line">            name:&quot;hello&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods:&#123;</span><br><span class="line">        // 定义方法</span><br><span class="line">        changeUsername()&#123;</span><br><span class="line">            this.name = &apos;name&apos; + Math.random()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    created()&#123;</span><br><span class="line">        // 生命周期钩子函数</span><br><span class="line">        console.log(&quot;create ....&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="css样式"><a href="#css样式" class="headerlink" title="css样式"></a>css样式</h4><p>样式中如果加入scoped就代表当前组件的样式，不污染全局<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style scoped&gt;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>组件包含很多内容，涉及组件通讯和生命周期管理等内容，篇幅较大不在这里赘述，另外路由的使用和状态管理都属于第三方插件内容，本次也不介绍了。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 编程 </tag>
+            
+            <tag> 前端 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[chrome_devtools]]></title>
+      <url>http://isteven.site/2017/03/19/chrome-devtools/</url>
+      <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DevTools 我们天天在用，然而你真正了解它么，未必</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="了解"><a href="#了解" class="headerlink" title="了解"></a>了解</h3><ul>
+<li>DevTools 的源码就在<a href="https://chromium.googlesource.com/chromium/blink.git/+/master/Source/devtools/" target="_blank" rel="noopener">Google的blink项目</a>中，高度的开放。目前这么多丰富的功能，正是 Google 和其社区的共同贡献。同时它的 License 也不拒绝任何的二次开发。</li>
+<li>DevTools 仅仅是简单的由 HTML、JavaScript、CSS、Images 组成的，本质上就是一个 WebApp，纯粹的前端应用。当你去了解、修改它时，你不需要理解 C++ 和任何编译的知识。</li>
+<li>事实上Devtools是一个充分模块化的JavaScript网页应用。它的每个功能你都可以去扩展（仅需要了解 JavaScript）。</li>
+</ul>
+<hr>
+<h3 id="初探"><a href="#初探" class="headerlink" title="初探"></a>初探</h3><ul>
+<li><p>开启调试命令： chrome –remote-debugging-port=9222</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i) 请确认关闭所有chrome页签</span><br><span class="line">ii) 把chrome 加入到你的 path 中（环境变量）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>你可以访问 <a href="http://localhost:9222/" target="_blank" rel="noopener">http://localhost:9222/</a> 获取devtools列表，点击可进入debug界面，是不是很熟悉。然后你可以继续ctrl+shift+i 调试这个debug界面，network里面可以看到socket通信，当鼠标与debug界面发生交互，那么socket会不断的有消息发出、接收。</p>
+<ul>
+<li>devtools 列表<br><img src="http://7u2q5h.com1.z0.glb.clouddn.com/image/devtools/devtools_rd_list.png" alt="示例"></li>
+<li>点击查看上图其中的一个devtool<br><img src="http://7u2q5h.com1.z0.glb.clouddn.com/image/devtools/devtools_rd_ws.png" alt="示例"></li>
+<li>你也可以访问 <a href="http://localhost:9222/json" target="_blank" rel="noopener">http://localhost:9222/json</a> 提供json数据列表<br><img src="http://7u2q5h.com1.z0.glb.clouddn.com/image/devtools/devtools_rd_jsonl.png" alt="示例"></li>
+</ul>
+</li>
+<li><p>使用json列表里面其中之一的 webSocketDebuggerUrl 来构建自己的websocket通讯，获取我们的数据</p>
+<ul>
+<li>这里需要注意，devtools的ws只支持单信道，所以同一时刻只能有一个连接</li>
+<li><p>直接上代码，使用h5的websocket连接</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var ws = new WebSocket(&quot;ws://localhost:9222/devtools/page/1e799774-96de-405f-bc3d-5f63daccc03b&quot;);</span><br><span class="line"></span><br><span class="line">ws.onopen = function (e) &#123;</span><br><span class="line"></span><br><span class="line">    console.log(&apos;Connection to server opened&apos;);</span><br><span class="line">    var msg1 = &#123;</span><br><span class="line">        id: 1,</span><br><span class="line">        method: &quot;Network.enable&quot;,</span><br><span class="line">        params: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ws.send(JSON.stringify(msg1));</span><br><span class="line">&#125;</span><br><span class="line">ws.onmessage = function(e)&#123;</span><br><span class="line">    console.log(&quot;accept server&apos;s data&quot;);</span><br><span class="line">    console.log(e.data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这里的消息格式要注意，同时你也可以用nodejs进行模拟，推荐ws模块</p>
+</li>
+<li>根据我们发送的信息，我们就可以获得我们需要的数据，数据有了，各种问题的分析就可以迎刃而解了。具体的应用场景后面在讨论。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="深入remote-debug"><a href="#深入remote-debug" class="headerlink" title="深入remote_debug"></a>深入remote_debug</h3><ul>
+<li><p>远程调试android chrome/webview</p>
+<ul>
+<li><p>chrome remote debug 命令  (可以调试也可以查看数据)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb forward tcp:9222 localabstract:chrome_devtools_remote</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>webview remote debug 命令  (只能用来查看数据，调试要使用inspect方式)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell pidof info.isteven.demo(包名) 获取进程id</span><br><span class="line">adb forward tcp:9222 localabstract:webview_devtools_remote_&lt;pid&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>chrome 普通调试方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chrome://inspect 都可以远程调试js(包括chrome/webview), 但是无法查看ws通讯数据</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>总结：需要深入数据研究的要使用命令调试，不喜欢折腾的inspect够玩了</p>
+</li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 前端 </tag>
+            
+            <tag> protocol </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[小程序初探]]></title>
+      <url>http://isteven.site/2017/02/09/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%88%9D%E6%8E%A2/</url>
+      <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">小程序是个什么鬼，你为什么这么快，为什么我的hybird没有你快！来大家一起来看看</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="小程序有哪些特点"><a href="#小程序有哪些特点" class="headerlink" title="小程序有哪些特点"></a>小程序有哪些特点</h3><ul>
+<li>类web，不是html5</li>
+<li>拥有离线能力</li>
+<li>跨平台</li>
+<li>媲美原生体验</li>
+</ul>
+<hr>
+<h3 id="小程序架构"><a href="#小程序架构" class="headerlink" title="小程序架构"></a>小程序架构</h3><ul>
+<li>直接上图<br><img src="http://7u2q5h.com1.z0.glb.clouddn.com/image/xiaochengxu/architecture.png" alt="示例"></li>
+<li>图片来源于网络，基本是这个意思，跟rn好像(只能这么说了)</li>
+<li><p>官方文档摘录，可以支持上面的架构实现<br>i)非原生组件绘制</p>
+<blockquote>
+</blockquote>
+<p>在 iOS 上，小程序的 javascript 代码是运行在 JavaScriptCore 中，是由WKWebView 来渲染的，环境有 iOS8、iOS9、iOS10<br>在Android 上，小程序的 javascript 代码是通过 X5 JSCore来解析，是由 X5<br>基于Mobile Chrome 37 内核来渲染的<br>在 开发工具上， 小程序的 javascript 代码是运行在 nwjs 中，是由 Chrome Webview &gt;来渲染的</p>
+<p>ii) 原生组件</p>
+<blockquote>
+</blockquote>
+<p>map、canvas、video、textarea 是由客户端创建的原生组件，原生组件的层级是最高的，所以页面中的其他组件无论设置 z-index 为多少，都无法盖在原生组件上。 原生组件暂时还无法放在 scroll-view 上，也无法对原生组件设置 css 动画。</p>
+</li>
+<li><p>小程序启动时从cdn下载完整包<br><img src="http://7u2q5h.com1.z0.glb.clouddn.com/image/xiaochengxu/cdnload.png" alt="示例"></p>
+</li>
+</ul>
+<h3 id="小程序demo"><a href="#小程序demo" class="headerlink" title="小程序demo"></a>小程序demo</h3><ul>
+<li><a href="https://github.com/Eric--/gcd" target="_blank" rel="noopener">github地址</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 前端 </tag>
+            
+            <tag> js </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[我的2016]]></title>
+      <url>http://isteven.site/2017/01/03/%E6%88%91%E7%9A%842016/</url>
+      <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">既然下决心把博客更新下去，也是一种人生的沉淀，所以这个总结也是必须的。2016这一年九分</span><br><span class="line">不如意，还好我挺过来了，也感谢我的老婆一路支持我。这一分的如意就是我媳妇，人生娶妻如此</span><br><span class="line">，夫复何求。</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="我结婚了"><a href="#我结婚了" class="headerlink" title="我结婚了"></a>我结婚了</h3><p>而立之年，我跟相爱二年的她结婚了，完成人生重要的一步，革命取得了阶段性胜利。还有个心病也解决了，我父母已经过来和我们一起生活，媳妇和妈相处的还算融洽，是不是每个男人都应该羡慕的。今年第一次带父母去全身体检，妈妈除了偏胖其他都没有问题，爸爸就是血压有点高，一切还算顺利，心里的石头也落下来了。</p>
+<hr>
+<h3 id="工作"><a href="#工作" class="headerlink" title="工作"></a>工作</h3><p>今年是工作后最不顺利的一年，不小心踩到坑里了。上半年做了一些活动，活没少干倒是领导觉得太简单，其实就是新来让你背个锅，我想想也就算了。下半年迎来了转机，部门要搞app这东西好啊，终于来用武之地了，没日没夜的搞，上了四五个版本，还算过的蛮充实，想用的技术也用了一些，想着年底有个好收成吧，没想到领导找我谈话，说有个大锅给你，我真是艹tm了。app是部门的重点产品，产品还没到成熟稳定器，先把将给斩了，分析来分析去觉得他就是个sb。这事还没完，反正找到哪都得要个说法。生气归生气，还得总结，昨天跟朋友说了他说这个总结不错，我就分享出来。</p>
+<blockquote>
+<p>还是个人跟公司跟环境匹配的问题，如果你比较牛逼呢，可以忽视后面我要说的，如果你一般牛逼呢，可以看看。我是一个不怎么会吹比的人，所以呢选择团队选择领导很重要，这样的人需要一个重视技术的领导，最好是技术出身很重要，另外领导不能太弱鸡，中庸也是犯罪，这里体现的尤为明显，所以领导要强势。团队呢，别搞个不干事情的团队，问题推来推去，不解决问题，只是想把锅甩给别人，所以找个干事情的团队很重要。这些东西可以从面试的时候你的面试官看出来，所以别忽视面试的问题，你能问出多少要看你自己的能耐了。狼带狼，羊带羊，弱鸡的领导没有得力干将越来越弱鸡，无能的手下只会让领导越来越弱鸡，所以选择需谨慎，谨防被坑。</p>
+</blockquote>
+<hr>
+<h3 id="旅行"><a href="#旅行" class="headerlink" title="旅行"></a>旅行</h3><p>今年去了希腊度蜜月，顺便去了德国。希腊不说了，美不胜收，人民生活节奏很慢，南欧的人生活比较慵懒。德意志民族确实强悍，社会制度成熟，人民生活有条不紊，真正是生活工作很协调。</p>
+<ul>
+<li><p>希腊：<br>希腊这次我们去的是圣岛，整体画风很美，阳光很大天气很热，美中的是天空颜色是灰的，老婆说是岛的原因。攻略也不写了，网上一大把，就是碰到好多中国大妈，哈哈！<br><img src="http://7u2q5h.com1.z0.glb.clouddn.com/image/me/DSC01249.JPG" alt="希腊"></p>
+</li>
+<li><p>德国：<br>我去的是德国的法兰克福，位于美茵河畔，冬日里的阳光很足，天很低很蓝，躺在河边呼吸着略带着冷意的新鲜空气，惬意啊舒服，真想不走了。德国的路很宽敞，车速很快，高速可以开到220,别问为什么，因为大家都这么块，很少出现交通事故，因为他们都很遵守规则，弯道看到stop一定要停下，一定要给路人让路，不然你工资的三分之一就没有了，总结法制很重要。德国的人很热情，主动帮你拍照，而且会附带依据congratulation，满满的好感。我比较喜欢德国，文明、成熟、稳定、健康，以后有机会看看其他国家，有想要攻略的可以联系我。<br><img src="http://7u2q5h.com1.z0.glb.clouddn.com/image/me/german.jpg" alt="德国"></p>
+</li>
+</ul>
+<hr>
+<h3 id="展望2017"><a href="#展望2017" class="headerlink" title="展望2017"></a>展望2017</h3><ol>
+<li>重要的是我要换一份工作</li>
+<li>去美国旅行，已经在日程上了</li>
+<li>租个大房子，暂时还没有资格买</li>
+<li>6块腹肌吧，呵呵</li>
+<li>游泳说了两年，今年要实现</li>
+<li>如果可能，要个小宝宝</li>
+<li>早上倒着走一年，治治我的程序员腰</li>
+</ol>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> life </tag>
+            
+            <tag> 编程 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[拥有自己的域名邮箱]]></title>
+      <url>http://isteven.site/2016/12/28/dnspod-domain/</url>
+      <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">不知道什么时候出现逼格这个词了，所以能作为程序员也要有自己的逼格，今天我们就来搞一下域名</span><br><span class="line">邮箱，不然老用@qq.com多low啊</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li>你要有qq邮箱（嘿嘿）</li>
+<li>你要有域名</li>
+<li>你用过dnspod吧（没有自行脑补）<blockquote>
+<p>这东西就是用来域名解析的，狗爹自己的域名解析有时候会被墙，所以呢，就有了这个东西</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h3 id="开始-step-by-step"><a href="#开始-step-by-step" class="headerlink" title="开始 step by step"></a>开始 step by step</h3><ul>
+<li>打开这个地址<a href="http://domain.mail.qq.com/" target="_blank" rel="noopener">QQ域名邮箱</a></li>
+<li>点击创建域名邮箱<br><img src="http://7u2q5h.com1.z0.glb.clouddn.com/image/domain/domain-1.png" alt="示例"></li>
+<li>NEXT 填写域名<br><img src="http://7u2q5h.com1.z0.glb.clouddn.com/image/domain/domain-2.png" alt="示例"></li>
+<li>NEXT 选择域名提供商<br><img src="http://7u2q5h.com1.z0.glb.clouddn.com/image/domain/domain-3.png" alt="示例"></li>
+<li>NEXT(请验证域名的所有权并设置MX记录),这里dns加上三条解析记录，下面是我的，这里可能会弹出<font color="red">记录冲突</font>，没有问题，继续就可以了<br><img src="http://7u2q5h.com1.z0.glb.clouddn.com/image/domain/domain-4.png" alt="示例"></li>
+<li>提交验证，这样就生成了域名邮箱<br><img src="http://7u2q5h.com1.z0.glb.clouddn.com/image/domain/domain-5.png" alt="示例"></li>
+<li>但是现在你要怎么发送邮件给你自己来测试呢，这里就要注意上面步骤里面标红的成员，所以<br>需要添加成员<br><img src="http://7u2q5h.com1.z0.glb.clouddn.com/image/domain/domain-6.png" alt="示例"></li>
+<li>添加成员成功后，就可以发送邮件给你的域名邮箱了，其实接收方还是你的@qq.com，只不过<br>现在它换了个名字<br><img src="http://7u2q5h.com1.z0.glb.clouddn.com/image/domain/domain-7.png" alt="示例"></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> dns </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[HEXO 迁移维护]]></title>
+      <url>http://isteven.site/2016/12/28/hexo-maintain/</url>
+      <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">这个博客之前是用modernist主题来练手的，后来觉得好丑就没有继续更新了，今天偶然想起来还有这个</span><br><span class="line">好东西，看看next的主题也很好，想着把它迁移过来，省的以后再丢失了</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="Github-两个库"><a href="#Github-两个库" class="headerlink" title="Github 两个库"></a>Github 两个库</h3><h4 id="代码生成库-daniellaodie-github-io-这个是-hexo-d-自动部署的"><a href="#代码生成库-daniellaodie-github-io-这个是-hexo-d-自动部署的" class="headerlink" title="代码生成库  daniellaodie.github.io (这个是 hexo d 自动部署的)"></a>代码生成库  <font color="red">daniellaodie.github.io</font> (这个是 <font color="red">hexo d</font> 自动部署的)</h4><ul>
+<li>目录结构<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── archives</span><br><span class="line">│   ├── *</span><br><span class="line">├── css</span><br><span class="line">│   ├── *</span><br><span class="line">├── fancybox</span><br><span class="line">│   ├── *</span><br><span class="line">├── images</span><br><span class="line">│   ├── *</span><br><span class="line">├── js</span><br><span class="line">│   ├── *</span><br><span class="line">├── lib</span><br><span class="line">│   ├── *</span><br><span class="line">├── tags</span><br><span class="line">│   ├── *</span><br><span class="line">├── index.html</span><br><span class="line">└── CNAME</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="源文件库-daniellaodie-github-com"><a href="#源文件库-daniellaodie-github-com" class="headerlink" title="源文件库 daniellaodie.github.com"></a>源文件库 <font color="red">daniellaodie.github.com</font></h4><ul>
+<li>目录结构<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── source</span><br><span class="line">│   ├── *</span><br><span class="line">├── _config.yml</span><br><span class="line">└── package.json</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="本地文件库"><a href="#本地文件库" class="headerlink" title="本地文件库"></a>本地文件库</h3><h4 id="hexo-init-生成的本地文件"><a href="#hexo-init-生成的本地文件" class="headerlink" title="hexo init 生成的本地文件"></a><font color="red">hexo init</font> 生成的本地文件</h4><ul>
+<li>目录结构<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── node_modules</span><br><span class="line">│   ├── *</span><br><span class="line">├── public</span><br><span class="line">│   ├── *</span><br><span class="line">├── scaffolds</span><br><span class="line">│   ├── *</span><br><span class="line">├── source</span><br><span class="line">│   ├── *</span><br><span class="line">├── themes</span><br><span class="line">│   ├── *</span><br><span class="line">├── _config.yml</span><br><span class="line">└── package.json</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="维护"><a href="#维护" class="headerlink" title="维护"></a>维护</h3><ul>
+<li>保证<font color="red">源文件库 daniellaodie.github.com</font>最新状态</li>
+<li>本地文件<font color="red">hexo d</font>后, 代码生成库更新到最新状态</li>
+<li>重要的是维护好源文件库的三个文件<font color="red">source，_config.yml，package.json</font></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> node </tag>
+            
+            <tag> git </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[前端的产品形态]]></title>
+      <url>http://isteven.site/2015/01/24/web-path/</url>
+      <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">一直以来都在寻找前端的开发路线，始终没有个明确的答案</span><br><span class="line">今天偶然看见玉伯关于前端模式的思考，遂记录之</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="目前前端的产品形态"><a href="#目前前端的产品形态" class="headerlink" title="目前前端的产品形态"></a>目前前端的产品形态</h2><hr>
+<ul>
+<li>前端涉及的产品形态在业界可分为两大类：Web Pages 和 Web Apps 。</li>
+<li>Web Pages 是浏览类的，用户主要是来看的：以内容展现为主，辅有少量交互。前端提供基础类库，开发工具化、外包化。典型：首页、营销活动、频道等等。</li>
+<li>Web Apps 则以交互为主，用户主要是来用的。可分为两种：<ul>
+<li>体验类：包含大量交互，同时用户体验很重要。比如 GMail, 支付宝收银台、淘宝购物车等等。</li>
+<li>功能类：包含大量交互，以功能为主，体验不是第一位的。比如后台系统、认证流程等。</li>
+</ul>
+</li>
+</ul>
+<h2 id="目前遇到的问题"><a href="#目前遇到的问题" class="headerlink" title="目前遇到的问题"></a>目前遇到的问题</h2><hr>
+<ul>
+<li>Web Apps 的开发，前端投入了大量人力，但前端资源依旧存在潜在的瓶颈（比如新增加一条业务线时，很可能无前端去支持）。现有前后端配合的开发模式，沟通协作成本偏高，可维护性不够方便。在现有的研发模式下，前端自身的价值点也很难体现出来（花了大量时间在业务上，但得到的认可不多）。</li>
+<li>最核心的问题，依旧是前后端的解耦：如何让前后端的工作彼此更独立，如何让更合适的人做更合适的事，把事情做得更好。</li>
+<li>对于体验类，目前业界有很多新兴的解决方案：Backbone, Ember, Knockout 等等，包括 YUI 的 App framework 等。这些解决方案，都希望后端专注于提供 REST 接口，其他的都交给前端来搞定。</li>
+<li>对于功能类的，目前业界解决方案依旧是比较老的一套，比如 GWT 等，包括 ExtJS 也是希望能让后端搞定一切。</li>
+</ul>
+<h2 id="解决问题的初步思路"><a href="#解决问题的初步思路" class="headerlink" title="解决问题的初步思路"></a>解决问题的初步思路</h2><hr>
+<ul>
+<li>前端组件化，包括两部分:<ul>
+<li>基础组件：通用的 Utilities + Widgets，比如 Cookie, Calendar, TabView 等等</li>
+<li>业务组件：针对具体的业务，由该业务线的前端，抽取出业务线的通用组件</li>
+</ul>
+</li>
+<li>后端接口化，将数据抽象化、模型化，可输出为 REST 接口</li>
+<li>耦合框架化:<ul>
+<li>将后端提供的 REST 接口封装成 Model 层（或者直接在模板层同步输出数据，将数据输出标准化）。</li>
+<li>将设计师提供的视觉产出转换成 Template 和 Style 。</li>
+<li>使用前端组件实现展现层的通用交互。可通过 data-attribute api 或 handlebars helper 在 template 配置完成。</li>
+<li>非标准化 View 层的开发，包括 Actions 等行为脚本的开发，含展现层的业务逻辑。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 编程 </tag>
+            
+            <tag> 前端 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[web 开发相关资源、网站、工具推荐]]></title>
+      <url>http://isteven.site/2014/03/19/web-resource-util/</url>
+      <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">刚开始学习的时候总是跑google去问资源在哪里，有什么网站可以参考，</span><br><span class="line">使用什么工具，今天花点时间总结一下，方便大家学习</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h1><hr>
+<ul>
+<li><a href="http://www.w3.org/TR/" target="_blank" rel="noopener">W3C</a> (官方文档)</li>
+<li><a href="http://www.whatwg.org/" target="_blank" rel="noopener">WhatWG</a>(官方文档)</li>
+<li><a href="https://developer.mozilla.org/zh-CN/" target="_blank" rel="noopener">MDN</a>(Mozilla Developer Network, 火狐的文档)<br>//建议使用英文版，中文版内容不全且更新日期较旧。</li>
+<li><a href="http://msdn.microsoft.com/zh-cn/ie/aa740473" target="_blank" rel="noopener">MSDN</a>(Microsoft Developer Network, 微软的文档)</li>
+<li><a href="http://docs.webplatform.org/wiki/Main_Page" target="_blank" rel="noopener">WebPlatform</a>(各大公司合作的一个产物，还不成熟)  </li>
+</ul>
+<h1 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h1><hr>
+<ul>
+<li><a href="http://www.w3schools.com/" target="_blank" rel="noopener">W3Schools</a> (Web方面的比较全的教程，新手向)</li>
+<li><a href="http://www.w3school.com.cn/" target="_blank" rel="noopener">W3school</a> (上一个链接[W3Schools]的中文翻译版)</li>
+<li><a href="http://www.html5rocks.com/" target="_blank" rel="noopener">HTML5 Rocks</a> (一个HTML5教程的网站)</li>
+<li><a href="http://www.w3cplus.com/" target="_blank" rel="noopener">W3CPlus</a> (国内的一个CSS3博客)</li>
+<li><a href="http://taligarsiel.com/Projects/howbrowserswork1.htm" target="_blank" rel="noopener">How browsers work</a> (不解释)</li>
+<li><a href="http://bonsaiden.github.io/JavaScript-Garden/zh/" target="_blank" rel="noopener">JavaScript 秘密花园</a> (不解释++)</li>
+<li><a href="http://mrale.ph/" target="_blank" rel="noopener">MRALEPH</a> (V8引擎效率解析)  </li>
+</ul>
+<h1 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h1><hr>
+<ul>
+<li><a href="http://www.planabc.net/" target="_blank" rel="noopener">怿飞</a></li>
+<li><a href="http://www.cnblogs.com/rubylouvre/" target="_blank" rel="noopener">司徒正美</a></li>
+<li><a href="http://www.zhangxinxu.com/wordpress/" target="_blank" rel="noopener">张鑫旭</a></li>
+<li><a href="https://github.com/lifesinger/lifesinger.github.com/issues?labels=blog" target="_blank" rel="noopener">玉伯</a></li>
+<li><a href="http://www.alloyteam.com/" target="_blank" rel="noopener">AlloyTeam</a>(腾讯)  </li>
+</ul>
+<p>#兼容性</p>
+<hr>
+<ul>
+<li><a href="http://quirksmode.org/" target="_blank" rel="noopener">QuirksMode</a> (DOM API兼容性列表)</li>
+<li><a href="http://caniuse.com/" target="_blank" rel="noopener">Can I use</a> (HTML5/CSS3兼容性表)</li>
+<li><a href="https://developer.mozilla.org/" target="_blank" rel="noopener">MDN</a> (具体条目下面会有兼容性列表)</li>
+<li><a href="http://kangax.github.io/es5-compat-table/" target="_blank" rel="noopener">ECMAScript 5/6 compatibility table</a> (ES5/ES6兼容性列表)</li>
+<li><a href="http://www.w3help.org/zh-cn/home/compatibility.html" target="_blank" rel="noopener">W3Help</a> (HTML布局兼容性问题)  </li>
+</ul>
+<h1 id="在线工具"><a href="#在线工具" class="headerlink" title="在线工具"></a>在线工具</h1><hr>
+<ul>
+<li><a href="http://www.ostools.net/" target="_blank" rel="noopener">STools</a> (开源中国工具集)</li>
+<li><a href="http://ganquan.info/yui/" target="_blank" rel="noopener">YUI Compressor</a> (在线压缩)</li>
+<li><a href="http://jsperf.com/" target="_blank" rel="noopener">jsPerf</a> (代码效率比较)</li>
+<li><a href="https://www.debuggex.com/" target="_blank" rel="noopener">Debuggex</a> (正则表达式调试)</li>
+<li><a href="http://easings.net/" target="_blank" rel="noopener">缓动函数速查表</a></li>
+<li><a href="http://esprima.org/demo/parse.html" target="_blank" rel="noopener">Esprima: Parser</a> (JS语法解析器)</li>
+<li><a href="http://cubic-bezier.com/" target="_blank" rel="noopener">cubic-bezier</a> (在线生成CSS3贝塞尔曲线代码)</li>
+<li><a href="http://netrenderer.com/" target="_blank" rel="noopener">IE NetRenderer</a> (在线查看网页在IE各版本的预览图)  </li>
+</ul>
+<h1 id="在线运行"><a href="#在线运行" class="headerlink" title="在线运行"></a>在线运行</h1><hr>
+<ul>
+<li><a href="http://jsbin.com/" target="_blank" rel="noopener">JS Bin</a></li>
+<li><a href="http://jsfiddle.net/" target="_blank" rel="noopener">JSFiddle</a></li>
+<li><a href="http://runjs.cn/" target="_blank" rel="noopener">RunJS</a></li>
+<li><a href="http://jsdo.it/" target="_blank" rel="noopener">jsdo.it</a></li>
+</ul>
+<h1 id="存储代码"><a href="#存储代码" class="headerlink" title="存储代码"></a>存储代码</h1><hr>
+<ul>
+<li><a href="http://ideone.com/" target="_blank" rel="noopener">Ideone</a></li>
+<li><a href="http://pastebin.com/" target="_blank" rel="noopener">Pastebin</a></li>
+<li><a href="http://paste.ubuntu.com/" target="_blank" rel="noopener">Ubuntu Pastebin</a></li>
+<li><a href="http://pastebin.mozilla.org/" target="_blank" rel="noopener">Mozilla Pastebin</a></li>
+<li><a href="https://gist.github.com/" target="_blank" rel="noopener">GitHub Gists</a></li>
+</ul>
+<p>#工具/内库</p>
+<hr>
+<ul>
+<li><a href="https://github.com/kripken/emscripten" target="_blank" rel="noopener">Emscripten</a> (LLVM to JS)</li>
+<li><a href="https://github.com/mozilla/shumway" target="_blank" rel="noopener">Zebra</a> (Canvas中实现按钮、输入框等常见控件)</li>
+<li><a href="https://github.com/barmalei/zebra" target="_blank" rel="noopener">Whammy</a> (JS生成WebM视频(仅Chrome))</li>
+<li><a href="http://peerjs.com/" target="_blank" rel="noopener">PeerJS</a> (P2P库)</li>
+<li><a href="https://peercdn.com/" target="_blank" rel="noopener">peerCDN</a> (P2P CDN)</li>
+<li><a href="https://github.com/jakesgordon/javascript-state-machine" target="_blank" rel="noopener">Javascript Finite State Machine</a> (JS有限状态机(FSM))</li>
+<li><a href="http://www.createjs.com/" target="_blank" rel="noopener">CreateJS</a> (HTML5库)</li>
+</ul>
+<p>#网站</p>
+<hr>
+<ul>
+<li><a href="http://www.easyicon.net/" target="_blank" rel="noopener">EASYICON</a> (图标下载)</li>
+<li><a href="http://fontello.com/" target="_blank" rel="noopener">Fontello</a> (图标字体生成)</li>
+<li><a href="https://edgewebfonts.adobe.com/fonts" target="_blank" rel="noopener">Adobe® Edge Web Fonts</a> (在线字体)</li>
+<li><a href="http://webcolourdata.com/" target="_blank" rel="noopener">Web Colour Data</a> (网站配色抓取)</li>
+<li><a href="http://unicode-table.com/" target="_blank" rel="noopener">Unicode character table</a> (Unicode字符表)</li>
+</ul>
+<p>#各大公司UED</p>
+<hr>
+<ul>
+<li><a href="http://ued.taobao.org/blog/" target="_blank" rel="noopener">淘宝</a></li>
+<li><a href="http://cdc.tencent.com/" target="_blank" rel="noopener">腾讯</a></li>
+<li><a href="http://www.19ued.com/" target="_blank" rel="noopener">19楼</a></li>
+<li><a href="http://www.kdued.com" target="_blank" rel="noopener">kingdee</a></li>
+<li><a href="http://www.aliued.cn/" target="_blank" rel="noopener">阿里</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 编程 </tag>
+            
+            <tag> 前端 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>
